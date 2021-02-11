@@ -44,7 +44,6 @@ jobs:
               id: tests
               with:
                 unityVersion: ${{ matrix.unityVersion }}
-                artifactsPath: ${{ matrix.testMode }}-artifacts
 
             # Upload Test Results
             - uses: actions/upload-artifact@v1

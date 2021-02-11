@@ -55,7 +55,7 @@ jobs:
             # Test
             - name: Run editor and play mode tests
               uses: webbertakken/unity-test-runner@v1.4
-              id: testRunner
+              id: tests
               with:
                 projectPath: ${{ matrix.projectPath }}
                 unityVersion: ${{ matrix.unityVersion }}

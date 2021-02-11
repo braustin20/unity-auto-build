@@ -1,8 +1,13 @@
 name: Basic Unity Build
 
 on:
-    pull_request: {}
+    pull_request:
+      branches-ignore: master
+      types: [opened, synchronize, reopened]
+      paths-ignore:
+        - README.md
     push: { branches: [main] }
+    workflow_dispatch:
 
 env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -16,7 +21,7 @@ jobs:
           matrix:
             # By default projectPath is root, change to path/to/your/project if necessary
             projectPath:
-              - /
+              - {}
             unityVersion:
               - 2020.2.13f1
             testMode:

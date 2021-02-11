@@ -1,4 +1,4 @@
-name: Basic Unity Build
+name: Basic Unity build
 
 on:
     push: { branches: [main] }
@@ -16,8 +16,6 @@ jobs:
           matrix:
             unityVersion:
               - 2020.1.11f1
-            # testMode:
-            #   - playmode
             targetPlatform:
               - StandaloneWindows64 # Build a Windows 64-bit standalone.
               - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
@@ -37,22 +35,9 @@ jobs:
             - name: Cache library files
               uses: actions/cache@v1.1.0
               with:
-                path: Library
-                key: Library
-
-            # # Test
-            # - name: Run editor and play mode tests
-            #   uses: webbertakken/unity-test-runner@v1.7
-            #   id: testRunner
-            #   with:
-            #     unityVersion: ${{ matrix.unityVersion }}
-            #     testMode: ${{ matrix.testMode }}
-
-            # # Upload Test Results
-            # - uses: actions/upload-artifact@v1
-            #   with:
-            #     name: Test results for ${{ matrix.testMode }}
-            #     path: ${{ steps.testRunner.outputs.artifactsPath }}
+                key: Library-${{ matrix.targetPlatform }}
+                restore-keys: |
+                  Library-
 
             # Build
             - name: Build project

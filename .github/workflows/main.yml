@@ -13,7 +13,7 @@ env:
 
 jobs:
     buildAndTest:
-        name: Build and test ${{ matrix.targetPlatform }}
+        name: Build ${{ matrix.targetPlatform }} using ${{ matrix.unityVersion }}
         runs-on: ubuntu-latest
         strategy:
           fail-fast: false

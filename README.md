@@ -1,2 +1,11 @@
 # unity-auto-build
-Template project to test automated github action builds
+
+## Getting Started
+https://game.ci/docs/github/getting-started
+
+## Activation
+https://game.ci/docs/github/activation
+
+## Unity Versions
+https://hub.docker.com/r/gableroux/unity3d/tags
+

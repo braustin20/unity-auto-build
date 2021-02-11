@@ -23,7 +23,7 @@ jobs:
             projectPath:
               - unity-auto-build
             unityVersion:
-              - 2020.2.13f1
+              - 2020.1.13f1
             testMode:
               - playmode
               - editmode

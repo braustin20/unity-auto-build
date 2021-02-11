@@ -19,9 +19,6 @@ jobs:
         strategy:
           fail-fast: false
           matrix:
-            # By default projectPath is root, change to path/to/your/project if necessary
-            projectPath:
-              - unity-auto-build
             unityVersion:
               - 2020.1.13f1
             testMode:
@@ -46,18 +43,14 @@ jobs:
             - name: Cache library files
               uses: actions/cache@v1.1.0
               with:
-                path: ${{ matrix.projectPath }}/Library
-                key: Library-${{ matrix.projectPath }}
-                restore-keys: |
-                  Library-${{ matrix.projectPath }}-
-                  Library-
+                path: Library
+                key: Library
 
             # Test
             - name: Run editor and play mode tests
               uses: webbertakken/unity-test-runner@v1.4
               id: tests
               with:
-                projectPath: ${{ matrix.projectPath }}
                 unityVersion: ${{ matrix.unityVersion }}
                 testMode: ${{ matrix.testMode }}
                 artifactsPath: ${{ matrix.testMode }}-artifacts
@@ -72,7 +65,6 @@ jobs:
             - name: Build project
               uses: webbertakken/unity-builder@v0.10
               with:
-                projectPath: ${{ matrix.projectPath }}
                 unityVersion: ${{ matrix.unityVersion }}
                 targetPlatform: ${{ matrix.targetPlatform }}
 

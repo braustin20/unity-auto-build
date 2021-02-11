@@ -20,7 +20,7 @@ jobs:
           fail-fast: false
           matrix:
             unityVersion:
-              - 2020.1.13f1
+              - 2020.1.11f1
             testMode:
               - playmode
               - editmode

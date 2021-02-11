@@ -1,5 +1,5 @@
-# unity-auto-build
-
+# Unity Automated Build Template
+![Basic Unity build](https://github.com/braustin20/unity-auto-build/workflows/Basic%20Unity%20build/badge.svg)
 ## Overview
 This project is a working example on how to implement GitHub action based automated builds for Unity.
 The basic build example uses a Unity 2020.1.11f1 image to build for Windows and OSX.
@@ -15,6 +15,7 @@ Once you have found the Unity version you would like to use, follow the steps be
 - Run the activation action on GitHub and download the `*.alf` activation file from the action's artifacts.
 - Visit https://license.unity3d.com, upload your `.alf` file, and follow the instructions to receive a `.ulf` license file.
 - Copy the contents of the `.ulf` file into a GitHub secret named `UNITY_LICENSE`
+
 More information on activation can be found here - https://game.ci/docs/github/activation
 
 ### Running builds

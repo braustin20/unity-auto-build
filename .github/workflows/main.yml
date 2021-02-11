@@ -16,6 +16,8 @@ jobs:
           matrix:
             unityVersion:
               - 2020.1.11f1
+            testMode:
+              - playmode
             targetPlatform:
               - StandaloneWindows64 # Build a Windows 64-bit standalone.
               - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
@@ -41,21 +43,21 @@ jobs:
             # Test
             - name: Run editor and play mode tests
               uses: webbertakken/unity-test-runner@v1.7
-              id: tests
+              id: testRunner
               with:
                 unityVersion: ${{ matrix.unityVersion }}
+                testMode: ${{ matrix.testMode }}
 
             # Upload Test Results
             - uses: actions/upload-artifact@v1
               with:
                 name: Test results for ${{ matrix.testMode }}
-                path: ${{ steps.tests.outputs.artifactsPath }}
+                path: ${{ steps.testRunner.outputs.artifactsPath }}
 
             # Build
             - name: Build project
               uses: webbertakken/unity-builder@v1.5
               with:
-                allowDirtyBuild: true
                 unityVersion: ${{ matrix.unityVersion }}
                 targetPlatform: ${{ matrix.targetPlatform }}
 

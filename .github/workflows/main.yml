@@ -1,7 +1,11 @@
 name: Basic Unity build
 
 on:
-    push: { branches: [main] }
+    push:
+      branches:
+        - main
+      paths-ignore:
+        - README.md
     workflow_dispatch:
 
 env:

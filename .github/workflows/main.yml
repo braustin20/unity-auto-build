@@ -11,6 +11,17 @@ jobs:
     build:
         name: Build my project
         runs-on: ubuntu-latest
+        strategy:
+          fail-fast: false
+          matrix:
+            # By default projectPath is root, change to path/to/your/project if necessary
+            projectPath:
+              - /
+            unityVersion:
+              - 2020.2.13f1
+            testMode:
+              - playmode
+              - editmode
         steps:
             # Checkout
             - name: Checkout repository
@@ -19,22 +30,35 @@ jobs:
                 lfs: true
 
             # Cache
-            - uses: actions/cache@v1.1.0
+            - name: Cache library files
+              uses: actions/cache@v1.1.0
               with:
-                path: Library
-                key: Library
+                path: ${{ matrix.projectPath }}/Library
+                key: Library-${{ matrix.projectPath }}
+                restore-keys: |
+                  Library-
 
             # Test
-            - name: Run tests
-              uses: webbertakken/unity-test-runner@v1.3
+            - name: Run editor and play mode tests
+              uses: webbertakken/unity-test-runner@v1.4
+              id: tests
               with:
-                unityVersion: 2020.1.13f1
+                projectPath: ${{ matrix.projectPath }}
+                unityVersion: ${{ matrix.unityVersion }}
+                testMode: ${{ matrix.testMode }}
+                artifactsPath: ${{ matrix.testMode }}-artifacts
+
+            # Upload Test Results
+            - uses: actions/upload-artifact@v1
+              with:
+                name: Test results (all modes)
+                path: ${{ steps.testRunner.outputs.artifactsPath }}
 
             # Build
             - name: Build project
               uses: webbertakken/unity-builder@v0.10
               with:
-                unityVersion: 2020.1.13f1
+                unityVersion: ${{ matrix.unityVersion }}
                 targetPlatform: WebGL
 
             # Output

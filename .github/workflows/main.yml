@@ -48,7 +48,7 @@ jobs:
 
             # Test
             - name: Run editor and play mode tests
-              uses: webbertakken/unity-test-runner@v1.4
+              uses: webbertakken/unity-test-runner@v1.7
               id: tests
               with:
                 unityVersion: ${{ matrix.unityVersion }}
@@ -63,7 +63,7 @@ jobs:
 
             # Build
             - name: Build project
-              uses: webbertakken/unity-builder@v0.10
+              uses: webbertakken/unity-builder@v1.5
               with:
                 unityVersion: ${{ matrix.unityVersion }}
                 targetPlatform: ${{ matrix.targetPlatform }}

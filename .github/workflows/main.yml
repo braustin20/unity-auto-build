@@ -12,7 +12,7 @@ env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-    buildAndTest:
+    build:
         name: Build ${{ matrix.targetPlatform }}
         runs-on: ubuntu-latest
         strategy:
